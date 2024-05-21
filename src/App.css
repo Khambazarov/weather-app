@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  /* border: 2px solid red; */
 }
 
 :root {
@@ -17,9 +18,23 @@
   background-color: #00b7ff;
   color: #fff;
   text-align: center;
-  /* display: grid; */
-  /* grid-template-columns: 1fr; */
-  /* grid-template-rows: fit-content auto auto auto auto auto auto max-content; */
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(3rem, 1fr) repeat(11, 3rem);
+  grid-template-areas:
+    "location"
+    "condition"
+    "temperature"
+    "temp-feels-like"
+    "max-temp"
+    "min-temp"
+    "wind"
+    "humidity"
+    "sunrise"
+    "sunset"
+    "form"
+    "footer";
 }
 
 img {
