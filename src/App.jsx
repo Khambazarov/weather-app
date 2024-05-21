@@ -116,14 +116,18 @@ function App() {
       <div className="condition">{SUNRISE}</div>
       <div className="condition">{SUNSET}</div>
       <form onSubmit={inputCity}>
-        <input type="text" ref={inputRef} autoFocus />
+        <input
+          type="text"
+          placeholder="Type a Location"
+          id="name"
+          name="name"
+          minLength="3"
+          required
+          autoFocus
+          ref={inputRef}
+        />
         <button type="submit">Submit</button>
       </form>
-      <div className="footer">
-        <div className="geo-location">Geo-Location</div>
-        <div className="locations"></div>
-        <div className="burger-menu">Burger-Menu</div>
-      </div>
     </div>
   );
 }
