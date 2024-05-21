@@ -48,27 +48,27 @@ function App() {
   const TEMP_MAX =
     data?.forecast?.forecastday?.map((item) => item?.day?.maxtemp_c) > 0
       ? `Max Temp: +${data?.forecast?.forecastday?.map(
-          (item) => item?.day?.maxtemp_c
+          (item) => Math.round(item?.day?.maxtemp_c)
         )} c°`
       : data?.forecast?.forecastday?.map((item) => item?.day?.maxtemp_c) < 0
       ? `Max Temp: -${data?.forecast?.forecastday?.map(
-          (item) => item?.day?.maxtemp_c
+          (item) => Math.round(item?.day?.maxtemp_c)
         )} c°`
       : `Max Temp: ${data?.forecast?.forecastday?.map(
-          (item) => item?.day?.maxtemp_c
+          (item) => Math.round(item?.day?.maxtemp_c)
         )} c°`;
 
   const TEMP_MIN =
     data?.forecast?.forecastday?.map((item) => item?.day?.mintemp_c) > 0
       ? `Min Temp: +${data?.forecast?.forecastday?.map(
-          (item) => item?.day?.mintemp_c
+          (item) => Math.round(item?.day?.mintemp_c)
         )} c°`
       : data?.forecast?.forecastday?.map((item) => item?.day?.mintemp_c) < 0
       ? `Min Temp: -${data?.forecast?.forecastday?.map(
-          (item) => item?.day?.mintemp_c
+          (item) => Math.round(item?.day?.mintemp_c)
         )} c°`
       : `Min Temp: ${data?.forecast?.forecastday?.map(
-          (item) => item?.day?.mintemp_c
+          (item) => Math.round(item?.day?.mintemp_c)
         )} c°`;
 
   const TEMP_FEELS_LIKE =
