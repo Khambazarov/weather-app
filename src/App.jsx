@@ -12,8 +12,8 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       if (city.trim()) {
-        const current = `http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}&aqi=yes`;
-        const forecast = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&aqi=yes`;
+        const current = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}&aqi=yes`;
+        const forecast = `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&aqi=yes`;
         try {
           const response1 = await fetch(current);
           const data1 = await response1.json();
