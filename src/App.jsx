@@ -1,28 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./App.css";
 
 const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
-const URL1 = `http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=Hamburg&aqi=yes`;
-const URL2 = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=Hamburg&aqi=yes`;
 
 function App() {
   const [data, setData] = useState(null);
+  const [city, setCity] = useState("");
+
+  const inputRef = useRef();
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response1 = await fetch(URL1 && URL2);
-        const data = await response1.json();
-        setData(data);
-      } catch (error) {
-        console.error("Error:", error);
+      if (city.trim()) {
+        const current = `http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}&aqi=yes`;
+        const forecast = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&aqi=yes`;
+        try {
+          const response1 = await fetch(current);
+          const data1 = await response1.json();
+          const response2 = await fetch(forecast);
+          const data2 = await response2.json();
+          setData({ ...data1, ...data2 });
+        } catch (error) {
+          console.error("Error:", error);
+        }
       }
     };
-
     fetchData();
-  }, []);
+  }, [city]);
 
-  const LOCATION = `Location: ${data?.location?.name}`;
+  const LOCATION = `Location: ${city}`;
   const CONDITION = `Condition: ${data?.current?.condition?.text}`;
   const SUNRISE = `Sunrise: ${data?.forecast?.forecastday?.map(
     (item) => item?.astro?.sunrise
@@ -75,6 +81,14 @@ function App() {
   const WIND_KPH = `Wind: ${Math.round(data?.current?.wind_kph)} kph`;
   const HUMIDITY = `Humidity: ${Math.round(data?.current?.humidity)}%`;
 
+  const inputCity = (e) => {
+    e.preventDefault();
+    const cityValue = inputRef.current.value;
+    if (cityValue) {
+      setCity(cityValue);
+    }
+  };
+
   return (
     <div className="container">
       <h1 className="location">{LOCATION}</h1>
@@ -87,6 +101,10 @@ function App() {
       <div className="temp-feelslike">{TEMP_FEELS_LIKE}</div>
       <div className="wind-speed">{WIND_KPH}</div>
       <div className="air-humidity">{HUMIDITY}</div>
+      <form onSubmit={inputCity}>
+        <input type="text" ref={inputRef} autoFocus />
+        <button type="submit">Submit</button>
+      </form>
       <div className="footer">
         <div className="geo-location">Geo-Location</div>
         <div className="locations"></div>
