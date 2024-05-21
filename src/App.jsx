@@ -26,7 +26,7 @@ function App() {
       }
     };
     fetchData();
-  }, [city]);
+  }, [API_KEY, city]);
 
   const LOCATION = `Location: ${city}`;
   const CONDITION = `Condition: ${data?.current?.condition?.text}`;
