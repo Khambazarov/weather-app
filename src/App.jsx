@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import "./App.css";
 
+const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+
 function App() {
-  const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
   const [data, setData] = useState(null);
   const [city, setCity] = useState("");
 
@@ -25,7 +26,7 @@ function App() {
       }
     };
     fetchData();
-  }, [API_KEY, city]);
+  }, [city]);
 
   const LOCATION = !city
     ? "Location"
@@ -121,7 +122,6 @@ function App() {
           placeholder="Type a Location"
           id="name"
           name="name"
-          minLength="3"
           required
           autoFocus
           ref={inputRef}
